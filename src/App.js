@@ -11,7 +11,7 @@ function App() {
        <Navbar />
        <Forecast />
        <div className="head">
-         <h3>Today's Highlights</h3>
+         <h5>Today's Highlights</h5>
        </div>
        <Sidebar />
       

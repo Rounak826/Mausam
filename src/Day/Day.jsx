@@ -6,7 +6,7 @@ export default function Day(props) {
         <div className="day">
             <h5>{props.day}</h5>
             <iframe src={props.icon} title={props.day + 'icon'} frameBorder="0" width={'100px'} height={'100px'}></iframe>
-            <p>{props.temp}&#176;{props.unit}</p>
+            <div className='tempDisplay'><h6>{props.temp.max}&#176;{props.unit}</h6><h6 className='disabled'>{props.temp.min}&#176;{props.unit}</h6></div>
         </div>
     )
 }

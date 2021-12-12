@@ -2,14 +2,11 @@
   margin: 0;
   padding: 0;
   background-color: #f1f1f1;
-  display: flex;
-  flex-direction: row-reverse;
-
 }
 .parent {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: auto repeat(3, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
@@ -17,9 +14,11 @@
   
 nav{
   width: 100%;
+  padding: 0 0.8rem;
 }
 .head{
-  grid-area:3 / 2 / 4 / 3;;
+  grid-area:3 / 2 / 4 / 3;
+  margin: 0.8rem 0.8rem;
 }
 .data{
   grid-area: 4 / 2 / 6 / 3;
