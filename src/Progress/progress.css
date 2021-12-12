@@ -1,0 +1,27 @@
+.progressBar{
+    position: relative;
+    margin: 4px;
+    float:left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .barOverflow{ /* Wraps the rotating .bar */
+    position: relative;
+    overflow: hidden; /* Comment this line to understand the trick */
+    width: 200px; height: 100px; /* Half circle (overflow) */
+    margin-bottom: -45px; /* bring the numbers up */
+  }
+  .bar{
+    position: absolute;
+    top: 0; left: 0;
+    width: 200px; height: 200px; /* full circle! */
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 12px solid #eee;     /* half gray, */
+    border-bottom-color: rgb(255, 238, 0);  /* half azure */
+    border-right-color: rgb(255, 238, 0);
+    transition: all 1s ease-in;
+  }

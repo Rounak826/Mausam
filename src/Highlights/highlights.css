@@ -1,0 +1,47 @@
+.highlights{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+}
+.card{
+    width: 30%;
+    height: 200px;
+    border-radius: 20px;
+    padding: 1rem;
+    border:none;
+    margin: 0.1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card .head{
+    margin: 0;
+}
+.card span{
+    font-size: 1rem;
+}
+.card h1{
+    font-size: 3rem;
+}
+.direction{    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+.direction span{
+    margin-left: 1rem;
+}
+.sun .sunrise{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.sun .sunset{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
