@@ -1,0 +1,12 @@
+.day{
+    width: 14%;
+    min-width: 120px;
+    padding: 0.2rem 0.3rem;
+    background-color: #fff;
+    margin: 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+}

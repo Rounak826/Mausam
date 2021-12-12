@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Forecast from './Forecast/Forecast';
+import Navbar from './Nav/Navbar';
+import Sidebar from './Sidebar/Sidebar';
 
 function App() {
+  //const apiKey='d85052c6489309d8dd2e383d6df86fcd';
+  //let url = 'api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}';
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App row-fluid parent">
+       <Navbar />
+       <Forecast />
+       <div className="head">
+         <h3>Today's Highlights</h3>
+       </div>
+       <Sidebar />
+      
     </div>
   );
 }
