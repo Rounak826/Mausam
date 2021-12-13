@@ -18,6 +18,7 @@ export default function Highlights(props) {
     }
 
     function time(timestamp){
+        if(timestamp==='--') return timestamp;
         let t = new Date(timestamp*1000);
         return t.toLocaleString('en-IN', {hour: 'numeric', minute:'numeric',hour12: true })
     }
@@ -48,7 +49,7 @@ export default function Highlights(props) {
                     </div>
                 </div>
                 <Card title={'humidity'} value={props.data.humidity +'%'} per={props.data.humidity} remark={'Low'} barHidden={false}/>
-                <Card title={'visibility'} value={props.data.visibility} per={0} remark={'normal'} barHidden={true}/>
+                <Card title={'visibility'} value={props.data.visibility!=='--'?props.data.visibility/1000+' Km':props.data.visibility} per={0} remark={'normal'} barHidden={true}/>
                 <Card title={'Air Quality'} value={props.aqi} per={props.aqi*20} remark={'Low'} barHidden={false}/>
         </div>
     )
