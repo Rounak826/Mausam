@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
+import debounce from 'lodash.debounce';
 import './Sidebar.css'
 import importAll from '../assets';
 import { Search, Crosshair, Cloud, CloudRain } from 'react-feather';
 const assets = importAll();
+
+let key =0;
 export default function Sidebar(props) {
+    const [list, setList] = useState(['Mungeli','Bilaspur','Raipur']);
+    const changeHandler = async event => {
+        let url ='https://api.locationiq.com/v1/autocomplete.php?key=pk.dbba3add5cfe9f4f88b5f093e0c90981&q='+event.target.value+'&limit=5' ;
+        fetch(url).then(async (a)=>{
+            let array=await a.json();
+            setList(await array);
+        });
+      };
+
+    const debouncedChangeHandler = useCallback(
+        debounce(changeHandler, 400)
+      , []);
+    
+
     function time(timestamp){
         let t = new Date(timestamp*1000);
         return t.toLocaleString('en-IN', {hour: 'numeric', minute:'numeric',hour12: true })
@@ -14,11 +31,15 @@ export default function Sidebar(props) {
         let dayName = days[d.getDay()];
         return dayName;
     }
+
     return (
         <div className="sidebar col-md-3">
             <div className="input-group pt-3">
             <Search color='#111' size="20" className='my-auto' />
-                <input type="text" className="form-control  search-input mx-1" placeholder="Search for places" aria-label="Search for places" aria-describedby="basic-addon2" />
+                <input autoComplete='off' onChange={(e)=>{debouncedChangeHandler(e)}}name='city_name' list="cityList" type="text" className="form-control  search-input mx-1" placeholder="Search for places" aria-label="Search for places" aria-describedby="basic-addon2" />
+                    <datalist id="cityList">
+                        {list.length?list.map((i)=><option key={key++} value={i.display_place}/>): 0 }
+                    </datalist>
                     <div className="input-group-append">
                         <button className="btn btn-light search-btn" type="button"><Crosshair color='#111' size="21" className='pb-1'/></button>
                     </div>
