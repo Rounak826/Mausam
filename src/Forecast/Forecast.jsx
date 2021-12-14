@@ -16,7 +16,7 @@ export default function Forecast(props) {
 
     return (
         <div className="forecast">
-           {daily.map(element => <Day key={dayName(element.dt)} day={dayName(element.dt)} temp={element.temp} unit={'C'} icon={assets[imageUrl(element.weather[0].icon)]} />) }
+           {daily.map(element => <Day key={dayName(element.dt)} day={dayName(element.dt)} temp={element.temp} unit={props.unit.temp} icon={assets[imageUrl(element.weather[0].icon)]} />) }
         </div>
     )
 }

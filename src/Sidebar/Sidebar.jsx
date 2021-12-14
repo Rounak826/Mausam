@@ -4,6 +4,7 @@ import './Sidebar.css'
 import importAll from '../assets';
 import { Search, Crosshair, Cloud, CloudRain } from 'react-feather';
 import imageUrl from '../imgUrl';
+import Loader from '../Loader/Loader';
 const assets = importAll();
 
 let key =0;
@@ -48,9 +49,10 @@ export default function Sidebar(props) {
                         <button onClick={()=>{props.searchHandler(city)}} className="btn btn-light search-btn" type="button"><Crosshair color='#111' size="21" className='pb-1'/></button>
                     </div>
             </div>
+            {props.status&&<Loader />}
             <iframe title="weather icon" height='250px' className='icon' src={assets[imageUrl(props.current.weather[0].icon)]} frameBorder="0"></iframe>
             <div className="basic-info">
-                <h1>{props.current.temp!=='--'?props.current.temp.toFixed(1):props.current.temp}<span>&#176;C</span></h1>
+                <h1>{props.current.temp!=='--'?props.current.temp.toFixed(1):props.current.temp}<span>&#176;{props.unit.temp}</span></h1>
                 <h4>{dayName(props.current.dt)}, <span className='disabled'>{time(props.current.dt)}</span></h4>
                 <hr />
             </div>

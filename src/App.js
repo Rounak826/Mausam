@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
+import debounce from 'lodash.debounce';
 import { useState, useEffect, useCallback } from 'react/cjs/react.development';
 import './App.css';
 import Forecast from './Forecast/Forecast';
@@ -304,7 +305,8 @@ const dailyNoData=[
     "uvi": 7
   }
 ];
-let search = true;
+
+let first = true;
 function App() {
   
   const apiKey = useMemo(()=>['d85052c6489309d8dd2e383d6df86fcd', 'c91bb7f5e6400bc5de0d8cde72c142b4'],[]);
@@ -312,22 +314,27 @@ function App() {
   const [daily, setDaily] = useState(dailyNoData);
   const [aqi, setAqi] = useState(0);
   const [status, setStatus] = useState(false)
-  //const [coords, setCoords] = useState({ lat: 0, long: 0 });
+  const [coords, setCoords] = useState({ latitude: 28.7041, longitude: 77.1025 });
   const [unit, setUnit] = useState('metric');
+  const [unitDisplay, setUnitDisplay] = useState({
+    temp: 'C' ,
+    distance: 'Km',
+    speed: 'Km/Hr' 
+  })
   const [error, setError] = useState({ status: false, message: '' });
   const [cityName, setCityName] = useState('Loading...');
+  const [active, setActive] = useState({c:'cur',f:'units'});
+
   const updateLocation = async (name) => {
     
     if (name) {
-      
       let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${apiKey[0]}`
       let data = await fetch(url);
       let resData = await data.json();
-      if (resData.length) { 
+      if (resData.length>=0) { 
         let coords = { latitude: resData[0].lat, longitude: resData[0].lon }
-        search = false;
-        getData(coords)
-        setCityName(name);
+        setCoords(coords);
+        //getData();
       } else {
         setError({ status: true, message: 'No info' })
       }
@@ -336,11 +343,28 @@ function App() {
   const searchBtnHandler = (name) => {
     updateLocation(name)
   }
-
+  const unitsHandler =(unit)=>{
+    console.log(unit);
+    setUnit(unit);
+    unit==='metric'?setActive({c:'cur',f:'units'}):setActive({c:'units',f:'cur'})
+    unit==='metric'?
+    setUnitDisplay({
+      temp: 'C' ,
+      distance: 'Km',
+      speed: 'Km/Hr' 
+    }):setUnitDisplay({
+      temp: 'F' ,
+      distance: 'Mi',
+      speed: 'MPH' 
+    })
+   
+  }
   const getData = useCallback(
-    async (coords) => {
+   debounce(
+    async () => {
       setCityName('Loading...');
-      //console.log(coords);
+      setStatus(true);
+      console.log('getData called')
       let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&exclude=minutely&appid=${apiKey[0]}&units=${unit}`;
       let aqiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey[0]}`;
       let reverse = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coords.latitude}&lon=${coords.longitude}&limit=1&appid=${apiKey[0]}`
@@ -352,15 +376,17 @@ function App() {
         resData.daily.shift();
         setDaily(resData.daily);
         setCurrent(resData.current);
-        setStatus(true);
+        setStatus(false);
       } else {
         setError({ status: true, message: 'could not fetch data' })
         setDaily(dailyNoData);
         setCurrent(currentNoData);
+        setStatus(false);
       }
       if(reverseData.status===200){
         let resReverse = await reverseData.json();
-        setCityName(resReverse[0].name); 
+        setCityName(resReverse[0].name);
+         
       }else{
         setCityName('No Info!');
       }
@@ -370,31 +396,42 @@ function App() {
       } else {
         setAqi("--")
       }
-
-    }, [unit, apiKey]
+      
+    },400
+   ), [unit, apiKey, coords]
   )
-  useEffect(() => {
+
+
+  useLayoutEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        if (search) {
-          getData(position.coords);
-          search = false;
+        if (first) {
+          setCoords(position.coords);
+          getData();
+          console.log(coords);
+          first = false;
         }
 
       });
     }
 
 
-  }, [getData])
+  });
+  useEffect(() => {
+      
+    getData()
+   
+  }, [getData, unit, coords])
+
   return (
     <div className="App row-fluid parent">
-      <Navbar />
-      <Forecast daily={daily} />
+      <Navbar unitsHandler={unitsHandler} active={active}/>
+      <Forecast daily={daily} unit={unitDisplay} />
       <div className="head">
         <h5>Today's Highlights</h5>
       </div>
-      <Highlights data={current} aqi={aqi} />
-      <Sidebar cityName={cityName} error={error}  current={current} searchHandler={searchBtnHandler} />
+      <Highlights data={current} unit={unitDisplay} aqi={aqi} />
+      <Sidebar cityName={cityName} status={status} error={error} unit={unitDisplay} current={current} searchHandler={searchBtnHandler} />
 
     </div>
   );

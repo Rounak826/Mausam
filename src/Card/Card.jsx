@@ -7,7 +7,7 @@ export default function Card(props) {
         <div className="card">
             <h5 className="head disabled">{props.title}</h5>
             <div className="display">
-                <h1>{props.value}</h1>
+                <h1>{props.value}<span>{props.unit}</span></h1>
                 <ProgressBar per={props.per} display={props.barHidden}/>
             </div>
             <h5>{props.remark}</h5>

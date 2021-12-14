@@ -27,13 +27,13 @@ export default function Highlights(props) {
         <div className="highlights">
                 <div className="card uvi">
                     <h5 className="head disabled">UV index</h5>
-                    <Progress per={props.data.uvi*10} value={props.data.uvi} />
+                    <Progress per={props.data.uvi>11?11*9.09:props.data.uvi*9.09} value={props.data.uvi} />
                 </div>
                 <div className="card wind">
                     <h5 className="head disabled">Wind Status</h5>
-                    <h1>{props.data.wind_speed} <span>Km/Hr</span></h1>
+                    <h1>{props.data.wind_speed} <span>{props.unit.speed}</span></h1>
                     <div className="direction">
-                        <ArrowUpCircle color='dodgerblue' style={{transform: "rotate(" + (props.data.wind_deg) + "deg)"}}></ArrowUpCircle>
+                        <ArrowUpCircle color='rgb(189, 96, 255)' style={{transform: "rotate(" + (props.data.wind_deg) + "deg)"}}></ArrowUpCircle>
                         <span>{degToCompass(props.data.wind_deg)}</span>
                     </div>
                 </div>
@@ -48,9 +48,9 @@ export default function Highlights(props) {
                         <h6>{time(props.data.sunset)}</h6>
                     </div>
                 </div>
-                <Card title={'humidity'} value={props.data.humidity +'%'} per={props.data.humidity} remark={'Low'} barHidden={false}/>
-                <Card title={'visibility'} value={props.data.visibility!=='--'?props.data.visibility/1000+' Km':props.data.visibility} per={0} remark={'normal'} barHidden={true}/>
-                <Card title={'Air Quality'} value={props.aqi} per={props.aqi*20} remark={'Low'} barHidden={false}/>
+                <Card title={'humidity'} value={props.data.humidity} per={props.data.humidity} unit={'%'} remark={'Low'} barHidden={false}/>
+                <Card title={'visibility'} value={props.data.visibility!=='--'?props.data.visibility/1000:props.data.visibility} unit={props.unit.distance} per={0} remark={'normal'} barHidden={true}/>
+                <Card title={'Air Quality'} value={props.aqi} per={props.aqi*20} remark={'Low'} unit={''} barHidden={false}/>
         </div>
     )
 }
