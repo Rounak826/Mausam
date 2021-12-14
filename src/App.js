@@ -314,7 +314,7 @@ function App() {
   const [daily, setDaily] = useState(dailyNoData);
   const [aqi, setAqi] = useState(0);
   const [status, setStatus] = useState(false)
-  const [coords, setCoords] = useState({ latitude: 28.7041, longitude: 77.1025 });
+  const [coords, setCoords] = useState({ latitude: 28.6517178, longitude: 77.2219388 });
   const [unit, setUnit] = useState('metric');
   const [unitDisplay, setUnitDisplay] = useState({
     temp: 'C' ,
@@ -359,7 +359,9 @@ function App() {
     })
    
   }
+  // eslint-disable-next-line
   const getData = useCallback(
+
    debounce(
     async () => {
       setCityName('Loading...');

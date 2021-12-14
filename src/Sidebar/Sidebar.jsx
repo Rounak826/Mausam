@@ -20,7 +20,7 @@ export default function Sidebar(props) {
             setCity(event.target.value);
         });
       };
-    
+    // eslint-disable-next-line
     const debouncedChangeHandler = useCallback(
         debounce(changeHandler, 300)
       , []);
@@ -41,7 +41,7 @@ export default function Sidebar(props) {
         <div className="sidebar col-md-3">
             <div className="input-group pt-3">
             <Search color='#111' size="20" className='my-auto' />
-                <input autoComplete='off' onChange={(e)=>{debouncedChangeHandler(e)}}name='city_name' list="cityList" type="text" className="form-control  search-input mx-1" placeholder="Search for places" aria-label="Search for places" aria-describedby="basic-addon2" />
+                <input autoComplete='off' onChange={(e)=>{debouncedChangeHandler(e)}}name='city_name' list="cityList" type="text" className="form-control  search-input mx-3" placeholder="Search for places" aria-label="Search for places" aria-describedby="basic-addon2" />
                     <datalist id="cityList">
                         {list.length?list.map((i)=><option key={key++} value={i.display_place}/>): 0 }
                     </datalist>

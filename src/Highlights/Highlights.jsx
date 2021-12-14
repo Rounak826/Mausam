@@ -4,7 +4,7 @@ import './highlights.css'
 import { ArrowUpCircle } from 'react-feather'
 import importAll from '../assets'
 import Card from '../Card/Card'
-
+import { remarkAqi,remarkHumidity, remarkVisibility } from '../remark'
 
 const assets = importAll();
 
@@ -33,7 +33,7 @@ export default function Highlights(props) {
                     <h5 className="head disabled">Wind Status</h5>
                     <h1>{props.data.wind_speed} <span>{props.unit.speed}</span></h1>
                     <div className="direction">
-                        <ArrowUpCircle color='rgb(189, 96, 255)' style={{transform: "rotate(" + (props.data.wind_deg) + "deg)"}}></ArrowUpCircle>
+                        <ArrowUpCircle color='rgb(189, 96, 255)' style={{transform: "rotate(" + (props.data.wind_deg) + "deg)",transition:'all 3s ease'}}></ArrowUpCircle>
                         <span>{degToCompass(props.data.wind_deg)}</span>
                     </div>
                 </div>
@@ -48,9 +48,9 @@ export default function Highlights(props) {
                         <h6>{time(props.data.sunset)}</h6>
                     </div>
                 </div>
-                <Card title={'humidity'} value={props.data.humidity} per={props.data.humidity} unit={'%'} remark={'Low'} barHidden={false}/>
-                <Card title={'visibility'} value={props.data.visibility!=='--'?props.data.visibility/1000:props.data.visibility} unit={props.unit.distance} per={0} remark={'normal'} barHidden={true}/>
-                <Card title={'Air Quality'} value={props.aqi} per={props.aqi*20} remark={'Low'} unit={''} barHidden={false}/>
+                <Card title={'humidity'} value={props.data.humidity} per={props.data.humidity} unit={'%'} remark={remarkHumidity(props.data.humidity)} barHidden={false}/>
+                <Card title={'visibility'} value={props.data.visibility!=='--'?props.data.visibility/1000:props.data.visibility} unit={props.unit.distance} per={0} remark={remarkVisibility(props.data.visibility)} barHidden={true}/>
+                <Card title={'Air Quality'} value={props.aqi} per={props.aqi*20} remark={remarkAqi(props.aqi)} unit={''} barHidden={false}/>
         </div>
     )
 }

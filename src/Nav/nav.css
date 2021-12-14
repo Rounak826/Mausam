@@ -60,3 +60,14 @@ nav .nav-items .cur:hover{
     -webkit-box-shadow: 2px 0px 29px -13px rgba(0,0,0,0.46);
     -moz-box-shadow: 2px 0px 29px -13px rgba(0,0,0,0.46);
 }
+
+@media only screen and (max-width: 600px) {
+    nav{
+        grid-area: 1 / 1 / 2 / 2;
+        margin: 0;
+        background-color: #fff;
+    }
+    nav .nav-items{
+        width: auto;
+    }
+}

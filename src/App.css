@@ -30,3 +30,24 @@ nav{
   grid-area: 4 / 2 / 7 / 3; 
   margin: 0.8rem 0.8rem;
 }
+
+@media only screen and (max-width: 600px) {
+    .parent{
+      grid-template-columns: 100%;
+      grid-template-rows: 4% 85vh 60vh auto 90vh;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+    }
+    .head{
+      grid-area: 4 / 1 / 5 / 2;
+      margin-bottom:0;
+    }
+    .highlights{
+      grid-area: 5 / 1 / 6 / 2;
+    }
+}
+@media only screen and (max-width: 385px) {
+  .parent{
+    grid-template-rows: 4% 85vh 90vh auto 90vh;
+  }
+}
