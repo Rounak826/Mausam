@@ -9,6 +9,7 @@ nav .brand{
     display: flex;
     align-items: center;
     justify-content: left;
+    font-family: 'Corinthia', cursive;
 }
 nav .brand h3{
     margin: 0;
@@ -62,6 +63,16 @@ nav .nav-items .cur:hover{
 }
 
 @media only screen and (max-width: 600px) {
+    nav{
+        grid-area: 1 / 1 / 2 / 2;
+        margin: 0;
+        background-color: #fff;
+    }
+    nav .nav-items{
+        width: auto;
+    }
+}
+@media only screen and (max-width: 1230px) {
     nav{
         grid-area: 1 / 1 / 2 / 2;
         margin: 0;

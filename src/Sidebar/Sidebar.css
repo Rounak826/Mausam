@@ -16,7 +16,6 @@
     border: none;
     text-align: center;
     border-radius:15px !important;
-    
 }
 .search-btn{
     border-radius:100px;
@@ -85,4 +84,43 @@
     }
     
 
+}
+@media only screen and (max-width: 1230px) {
+    .sidebar{
+        width: 100%;
+        padding: 0 2rem;
+        text-align: center;
+        grid-area: 1 / 1 / 7 / 2;
+    }
+    .sidebar iframe{
+        width: 300px;
+        height: 300px;
+    }
+    .sidebar .basic-info{
+        text-align: center;
+        
+    }
+    .sidebar .basic-info h1{
+        font-size: 8rem;
+        font-weight: 300;
+    }
+    .other-info{
+        width: 20%;
+    }
+    .other-info .desc{
+        display: flex;
+        justify-content: left;
+    }
+    .other-info .desc p{
+        margin-left: 1rem;
+        
+    }
+    .sidebar .location{
+        background-color: hotpink;
+        width: 100%;
+        padding: 1.5rem 1rem;
+        border-radius: 20px;
+    }
+    
+    
 }

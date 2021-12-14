@@ -5,7 +5,7 @@ export default function Navbar(props) {
     return (
         <nav className='py-auto px-3'>
             <div className="brand">
-                   
+                   <h3>Mausam</h3>
             </div>
             
             <div className="nav-items">

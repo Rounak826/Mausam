@@ -48,6 +48,21 @@ nav{
 }
 @media only screen and (max-width: 385px) {
   .parent{
-    grid-template-rows: 4% 85vh 90vh auto 90vh;
+    grid-template-rows: 5vh 80vh 60vh auto 90vh;
+  }
+}
+@media only screen and (max-width: 1230px) {
+  .parent{
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 85vh 30vh auto 90vh;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+  .head{
+    grid-area: 4 / 1 / 5 / 2;
+    margin-bottom:0;
+  }
+  .highlights{
+    grid-area: 5 / 1 / 6 / 2;
   }
 }
