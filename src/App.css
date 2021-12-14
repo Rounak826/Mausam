@@ -51,7 +51,7 @@ nav{
     grid-template-rows: 5vh 80vh 60vh auto 90vh;
   }
 }
-@media only screen and (max-width: 1230px) {
+@media only screen and (min-width: 385px) and (max-width: 1230px) {
   .parent{
     grid-template-columns: 100%;
     grid-template-rows: 10% 85vh 30vh auto 90vh;

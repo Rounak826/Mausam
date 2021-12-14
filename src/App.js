@@ -1,6 +1,6 @@
 import { useLayoutEffect, useMemo } from 'react';
 import debounce from 'lodash.debounce';
-import { useState, useEffect, useCallback } from 'react/cjs/react.development';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Forecast from './Forecast/Forecast';
 import Highlights from './Highlights/Highlights';
@@ -328,7 +328,7 @@ function App() {
   const updateLocation = async (name) => {
     
     if (name) {
-      let url = `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${apiKey[0]}`
+      let url = `https://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=5&appid=${apiKey[0]}`
       let data = await fetch(url);
       let resData = await data.json();
       if (resData.length>=0) { 
@@ -368,8 +368,8 @@ function App() {
       setStatus(true);
       console.log('getData called')
       let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&exclude=minutely&appid=${apiKey[0]}&units=${unit}`;
-      let aqiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey[0]}`;
-      let reverse = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coords.latitude}&lon=${coords.longitude}&limit=1&appid=${apiKey[0]}`
+      let aqiUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey[0]}`;
+      let reverse = `https://api.openweathermap.org/geo/1.0/reverse?lat=${coords.latitude}&lon=${coords.longitude}&limit=1&appid=${apiKey[0]}`
       let data = await fetch(url);
       let reverseData = await fetch(reverse);
       let aqiData = await fetch(aqiUrl);

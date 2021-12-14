@@ -4,7 +4,7 @@ import './highlights.css'
 import { ArrowUpCircle } from 'react-feather'
 import importAll from '../assets'
 import Card from '../Card/Card'
-import { remarkAqi,remarkHumidity, remarkVisibility } from '../remark'
+import { remarkAqi, remarkHumidity, remarkVisibility } from '../remark'
 
 const assets = importAll();
 
